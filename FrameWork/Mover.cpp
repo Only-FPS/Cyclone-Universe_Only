@@ -6,11 +6,13 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include "glm/gtx/matrix_transform_2d.hpp"
 
+const float m_pi = glm::pi<float>();
+
 Mover::Mover()
 {
 	m_particle = new cyclone::Particle();
 	std::random_device rd;
-	std::uniform_real_distribution<double> dist(-150.0, 150.0);
+	std::uniform_real_distribution<double> dist(-500.0, 500.0);
 
 	//double x, y, z;
 	//x = dist(rd);
@@ -28,7 +30,7 @@ Mover::Mover()
 	m_particle->setVelocity(0, 0, 0);
 	m_particle->setMass(100.0f);
 	m_particle->setDamping(1.0f);
-	size = glm::pow((m_particle->getMass() * 3.0 / 4.0 / 3.1415), 0.3333);
+	size = glm::pow((m_particle->getMass() * 3.0 / 4.0 / m_pi), 0.3333);
 	//m_particle->setPosition(2, 10, 2);
 	//m_particle->setDamping(0.99f);
 	//m_particle->setAcceleration(cyclone::Vector3::);
@@ -54,7 +56,7 @@ Mover::~Mover()
 }
 
 float fx(int timer) {
-	return (0.06 * (sin(32) * timer / 12) + pow(3.141592, cos(timer)) - 2 * cos(4 * timer)) / sin(32);
+	return (0.06 * (sin(32) * timer / 12) + pow(m_pi, cos(timer)) - 2 * cos(4 * timer)) / sin(32);
 }
 float gx(int x) {
 	return sin(fx(x)) * x + cos(x);
@@ -62,11 +64,11 @@ float gx(int x) {
 
 float rad2deg(double radian)
 {
-	return radian * 180 / 3.141592;
+	return radian * 180 / m_pi;
 }
 float deg2rad(double degree)
 {
-	return degree * 3.141592 / 180;
+	return degree * m_pi / 180;
 }
 glm::vec3 rad2normal(float rad) {
 	glm::vec3 velocity = glm::vec3(0, 1, 1) * glm::rotate(glm::mat3(1.0f), rad);
@@ -80,7 +82,7 @@ glm::vec3 rad2normal(float rad) {
 void Mover::update(float duration)
 {
  	//m_particle->addForce(wind);
-	size = glm::pow((m_particle->getMass() * 3.0 / 4.0 / 3.1415), 0.3333);
+	size = glm::pow((m_particle->getMass() * 3.0 / 4.0 / m_pi), 0.3333);
 	m_particle->integrate(duration);
 
 	//checkEdges();
@@ -168,7 +170,7 @@ void Mover::draw(int shadow)
 	glPushMatrix();
 
 	glTranslatef(pos.x, pos.y, pos.z);
-	glutSolidCube(size);
+	glutSolidSphere(size, 4, 4);
 
 	glPopMatrix();
 

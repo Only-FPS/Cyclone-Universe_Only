@@ -69,7 +69,7 @@ int main()
 	Fl::scheme("plastic");// plastic
 	int width = 800;
 	int height = 800;
-	Fl_Double_Window* wind = new Fl_Double_Window(100, 100, width, height, "GL 3D FrameWork");
+	Fl_Double_Window* wind = new Fl_Double_Window(100, 100, width, height, "GL 3D FrameWork | Made by Only, Special Thanks to. Duckbob");
 
 	wind->begin();		// put widgets inside of the window
 

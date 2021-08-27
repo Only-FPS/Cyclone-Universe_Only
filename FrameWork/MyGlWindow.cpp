@@ -11,7 +11,7 @@
 #include "timing.h"
 
 
-static double DEFAULT_VIEW_POINT[3] = { 30, 30, 30 };
+static double DEFAULT_VIEW_POINT[3] = { 600, 600, 600 };
 static double DEFAULT_VIEW_CENTER[3] = { 0, 0, 0 };
 static double DEFAULT_UP_VECTOR[3] = { 0, 1, 0 };
 
@@ -31,7 +31,7 @@ MyGlWindow::MyGlWindow(int x, int y, int w, int h) :
 	float aspect = (w / (float)h);
 	m_viewer = new Viewer(viewPoint, viewCenter, upVector, 45.0f, aspect);
 
-	for (int i = 0; i < 100; i++) {
+	for (int i = 0; i < 2500; i++) {
 		m_mover.push_back(new Mover());
 	}
 
@@ -353,7 +353,7 @@ void MyGlWindow::setProjection(int clearProjection)
 		glLoadIdentity();
 	// compute the aspect ratio so we don't distort things
 	double aspect = ((double)w()) / ((double)h());
-	gluPerspective(fieldOfView, aspect, 1, 1000);
+	gluPerspective(fieldOfView, aspect, 1, 3000);
 
 	// put the camera where we want it to be
 	glMatrixMode(GL_MODELVIEW);
@@ -452,4 +452,3 @@ void MyGlWindow::getMouseNDC(float& x, float& y)
 	x = (mx / wd) * 2.0f - 1.f;
 	y = (my / hd) * 2.0f - 1.f;
 }
-
